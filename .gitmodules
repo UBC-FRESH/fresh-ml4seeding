@@ -1,0 +1,3 @@
+[submodule "external/fresh-ml4seeding-data"]
+	path = external/fresh-ml4seeding-data
+	url = https://github.com/UBC-FRESH/fresh-ml4seeding-data.git
