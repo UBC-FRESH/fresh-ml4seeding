@@ -12,8 +12,8 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P1 Core image processing | TBD | `main` | Complete |
 | P2 U-Net model and training | TBD | `main` | Complete (module stubs) |
 | P3 CLI and evaluation | TBD | `main` | Complete (CLI scaffold) |
-| P4 Docs, examples, alpha hardening | TBD | `feature/p4-alpha-hardening` | Planned |
-| P5 Data management and DataLad | TBD | `feature/p5-data-management` | Planned |
+| P4 Docs, examples, alpha hardening | #2 | `main` | Active |
+| P5 Data management and DataLad | #1 | `main` | Active |
 
 ## Phase 0: Bootstrap Scaffold
 

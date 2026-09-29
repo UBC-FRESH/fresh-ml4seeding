@@ -82,12 +82,13 @@ def test_draw_grid_camo_blends_neighbor_color_into_line():
     img[:, 2:8] = 200
     out = draw_grid_camo(img, spacing=8, thickness=1, band=6, alpha=1.0)
 
-    # line at x=8 sees 6 bright columns (left) and 6 black columns (right)
-    assert tuple(out[0, 8]) == (100, 100, 100)
+    # check row 4, which is not crossed by a horizontal grid line:
+    # the vertical line at x=8 sees 6 bright columns (left) and 6 black (right)
+    assert tuple(out[4, 8]) == (100, 100, 100)
     # something changed relative to the input
     assert not np.array_equal(out, img)
     # far from any bright strip, lines stay black (camouflaged into black)
-    assert tuple(out[0, 24]) == (0, 0, 0)
+    assert tuple(out[4, 24]) == (0, 0, 0)
 
 
 def _make_tile_set(tmp_path: Path, n: int = 2) -> tuple[Path, Path]:
