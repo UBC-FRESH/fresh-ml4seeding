@@ -113,6 +113,3 @@ are managed through the DataLad data submodule (see `external/`).
 ## Related Projects
 
 - [ML4seeding](https://github.com/UBC-FRESH/ML4seeding) — original prototype (archived)
-- [FreshForge](https://github.com/UBC-FRESH/freshforge) — workflow-as-code for FRESH ecosystem
-- [FHOPS](https://github.com/UBC-FRESH/fhops) — forest harvest operations scheduling
-- [Modelwright](https://github.com/UBC-FRESH/modelwright) — model conversion and validation
