@@ -13,7 +13,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P2 U-Net model and training | — | `main` | Complete (pre-workflow) |
 | P3 CLI and evaluation | — | `main` | Complete (pre-workflow) |
 | P4 v0.1.0a1 alpha release | #3 | `main` | Complete |
-| P5 Populate DataLad data repo | #4 | `feature/p5-populate-data-repo` | Planned |
+| P5 Populate DataLad data repo | #4 | `main` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -90,13 +90,14 @@ management workflow.
 
 ## Current Next Steps
 
-Phase 4 is complete: `v0.1.0a1` is tagged and published as a GitHub prerelease
-with checked artifacts. Phase 5 (populate DataLad data repo) is the next active
-phase, tracked in issue #4.
+Phases 0–5 are complete. The package is validated against real A10 Segment 1
+drone imagery (484 valid DJI images with GPS). The DataLad data repo is fully
+operational with git-annex + Arbutus S3.
 
 The immediate next steps are:
 
-1. Create feature branch `feature/p5-populate-data-repo` for issue #4.
-2. Populate the data repo with A10/A58/G15 orthomosaics, model weights, and masks.
-3. Validate the package against real drone imagery.
-4. Begin Phase 6 planning: cross-site validation and model evaluation on A58/G15.
+1. Re-download truncated data from OneDrive (A58 raw images, A58 GeoTIFF).
+2. Download A10 and G15 orthomosaics from OneDrive.
+3. Build pseudo-orthomosaic from A10 raw images using the package.
+4. Begin Phase 6: cross-site validation and model evaluation on A58/G15.
+5. Update the technical report with actual code repo and data availability.

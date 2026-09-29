@@ -16,6 +16,17 @@ issues + PR to `main`.
   GitHub prerelease with checked artifacts:
   <https://github.com/UBC-FRESH/fresh-ml4seeding/releases/tag/v0.1.0a1>.
 - Closed parent issue #3.
+- Completed Phase 5 by converting the data repo to a DataLad dataset with
+  git-annex (`text2git`), configuring the Arbutus S3 special remote
+  (`object-arbutus.cloud.computecanada.ca`, bucket `ubc-fresh-ml4seeding-data`),
+  annexing 691 files (11.81 GB), uploading all payloads to S3, wiring the
+  publication dependency, and verifying fresh-clone + selective retrieval.
+- Transferred 13.6 GB raw drone images, 1.4 GB orthomosaics, and 568 MB site
+  visit photos from office desktop via Globus Connect Personal.
+- Validated the package against real DJI ZenmuseP1 imagery: 484 valid images
+  with GPS DMS coordinates, pose extraction (yaw/pitch/roll), coordinate
+  conversion, and spacing estimation all working correctly.
+- Closed parent issue #4.
 
 - Created the fresh-ml4seeding repository as a re-implementation of the
   prototype ML4seeding pipeline with proper UBC-FRESH software engineering
