@@ -10,7 +10,14 @@ high-resolution drone imagery to support precision aerial reforestation.
 
    installation
    examples
+   api
    roadmap
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Guides:
+
+   guides/data-management
 
 Statement of Need
 -----------------

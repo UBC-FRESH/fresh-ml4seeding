@@ -26,17 +26,9 @@ _CAP_PIXELS: int = 2_000_000
 def laplacian_variance(gray: np.ndarray) -> float:
     """Compute the variance of the discrete Laplacian of a grayscale image.
 
-    Higher values indicate sharper imagery.  For 8-bit RGB drone orthos:
-
-    ============  ==============
-    Laplacian var  Interpretation
-    ============  ==============
-    < 500          Very blurry
-    500 – 1500     Soft
-    1500 – 4000    Normal
-    4000 – 8000    Sharp
-    > 8000         Very sharp
-    ============  ==============
+    Higher values indicate sharper imagery. For 8-bit RGB drone orthos,
+    typical interpretation ranges are: below 500 very blurry, 500-1500 soft,
+    1500-4000 normal, 4000-8000 sharp, above 8000 very sharp.
 
     Parameters
     ----------
