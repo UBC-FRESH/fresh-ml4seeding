@@ -8,10 +8,10 @@ synchronized with GitHub issues, planning notes, pull requests, and
 
 | Phase | Parent issue | Branch | Status |
 |-------|-------------|--------|--------|
-| P0 Bootstrap scaffold | TBD | `feature/p0-bootstrap-scaffold` | Active |
-| P1 Core image processing | TBD | `feature/p1-core-image-processing` | Planned |
-| P2 U-Net model and training | TBD | `feature/p2-unet-model-training` | Planned |
-| P3 CLI and evaluation | TBD | `feature/p3-cli-evaluation` | Planned |
+| P0 Bootstrap scaffold | TBD | `main` | Complete |
+| P1 Core image processing | TBD | `main` | Complete |
+| P2 U-Net model and training | TBD | `main` | Complete (module stubs) |
+| P3 CLI and evaluation | TBD | `main` | Complete (CLI scaffold) |
 | P4 Docs, examples, alpha hardening | TBD | `feature/p4-alpha-hardening` | Planned |
 | P5 Data management and DataLad | TBD | `feature/p5-data-management` | Planned |
 
@@ -90,9 +90,10 @@ management workflow.
 
 ## Current Next Steps
 
-Phase 0 is active. The immediate next steps are:
+Phases 0–3 are complete in scaffold form. The immediate next steps are:
 
-1. Complete the package skeleton and governance files.
-2. Set up CI and docs workflows.
-3. Initialize the git repository and push to GitHub.
-4. Create the GitHub repo and open the first issues.
+1. Phase 4: Harden docs, add example notebooks, prepare for v0.1.0a1 release.
+2. Phase 5: Create the DataLad data repository (`fresh-ml4seeding-data`) and
+   link as a submodule.
+3. Open GitHub issues to track Phase 4 and Phase 5 tasks.
+4. Validate the package against real drone imagery from the A10/A58/G15 sites.
