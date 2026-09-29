@@ -90,10 +90,13 @@ management workflow.
 
 ## Current Next Steps
 
-Phases 0–3 are complete in scaffold form. The immediate next steps are:
+Phases 0–4 are substantially complete. Phase 5 (DataLad) is partially complete
+(data repo created, submodule linked, data not yet populated).
 
-1. Phase 4: Harden docs, add example notebooks, prepare for v0.1.0a1 release.
-2. Phase 5: Create the DataLad data repository (`fresh-ml4seeding-data`) and
-   link as a submodule.
-3. Open GitHub issues to track Phase 4 and Phase 5 tasks.
-4. Validate the package against real drone imagery from the A10/A58/G15 sites.
+The immediate next steps are:
+
+1. Populate the data repo with A10/A58/G15 drone imagery and model weights.
+2. Validate the package against real drone imagery.
+3. Tag v0.1.0a1 and create a GitHub prerelease.
+4. Consider upgrading to full DataLad+annex pattern when git-annex is available.
+5. Begin Phase 6: cross-site validation and model evaluation on A58/G15.

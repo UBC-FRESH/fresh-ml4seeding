@@ -35,5 +35,15 @@ completion and GitHub issue comments.
   grid overlay with adaptive color sampling).
 - Extended CLI with `ortho analyze`, `pseudo-ortho build`, `tile create`,
   and `grid add` commands.
-- All 73 tests passing; ruff clean; Sphinx docs building without warnings.
+- All 108 tests passing; ruff clean; Sphinx docs building without warnings.
+- Created `UBC-FRESH/fresh-ml4seeding-data` as DataLad dataset (--no-annex)
+  and added as git submodule at `external/fresh-ml4seeding-data`.
+- Opened GitHub issues #1 (P5 DataLad) and #2 (P4 alpha hardening).
+- Added API reference documentation (`docs/api.rst`) with autodoc for all
+  10 modules.
+- Added data management guide (`docs/guides/data-management.rst`).
+- Added CLI usage examples (`docs/examples.rst`).
+- Added example notebook (`examples/00_package_orientation.ipynb`) with
+  synthetic data demos for all package modules.
+- Expanded tiling and grid test coverage with GeoTIFF fixtures and edge cases.
 
