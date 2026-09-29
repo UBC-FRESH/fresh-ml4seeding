@@ -12,8 +12,8 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P1 Core image processing | — | `main` | Complete (pre-workflow) |
 | P2 U-Net model and training | — | `main` | Complete (pre-workflow) |
 | P3 CLI and evaluation | — | `main` | Complete (pre-workflow) |
-| P4 v0.1.0a1 alpha release | #3 | `feature/p4-v0.1.0a1-release` | Active |
-| P5 Populate DataLad data repo | #4 | `feature/p5-populate-data-repo` | Planned (blocked by #3) |
+| P4 v0.1.0a1 alpha release | #3 | `main` | Complete |
+| P5 Populate DataLad data repo | #4 | `feature/p5-populate-data-repo` | Planned |
 
 ## Phase 0: Bootstrap Scaffold
 
@@ -90,13 +90,13 @@ management workflow.
 
 ## Current Next Steps
 
-Phases 0–4 are substantially complete. Phase 5 (DataLad) is partially complete
-(data repo created, submodule linked, data not yet populated).
+Phase 4 is complete: `v0.1.0a1` is tagged and published as a GitHub prerelease
+with checked artifacts. Phase 5 (populate DataLad data repo) is the next active
+phase, tracked in issue #4.
 
 The immediate next steps are:
 
-1. Populate the data repo with A10/A58/G15 drone imagery and model weights.
-2. Validate the package against real drone imagery.
-3. Tag v0.1.0a1 and create a GitHub prerelease.
-4. Consider upgrading to full DataLad+annex pattern when git-annex is available.
-5. Begin Phase 6: cross-site validation and model evaluation on A58/G15.
+1. Create feature branch `feature/p5-populate-data-repo` for issue #4.
+2. Populate the data repo with A10/A58/G15 orthomosaics, model weights, and masks.
+3. Validate the package against real drone imagery.
+4. Begin Phase 6 planning: cross-site validation and model evaluation on A58/G15.
