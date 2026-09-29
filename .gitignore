@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Testing
+.pytest_cache/
+coverage.xml
+htmlcov/
+
+# Build
+_build/
+*.whl
+
+# Local working areas (FRESH pattern)
+tmp/
+local/
+data/private/
+outputs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# DataLad / git-annex
+*.log
+
+# Model weights and large artifacts
+*.keras
+*.h5
+*.npy
+
+# Environment
+.env
