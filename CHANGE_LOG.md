@@ -5,6 +5,13 @@ completion and GitHub issue comments.
 
 ## 2026-09-29
 
+**Workflow deviation notice:** Phases 0–3 were implemented directly on `main`
+without following the UBC-FRESH phase/task/subtask workflow (no feature
+branches, no parent/child issues, no PRs). This was a process error. From
+this point forward, all work follows the strict workflow documented in
+`AGENTS.md`: one phase = one parent issue + one feature branch + child task
+issues + PR to `main`.
+
 - Created the fresh-ml4seeding repository as a re-implementation of the
   prototype ML4seeding pipeline with proper UBC-FRESH software engineering
   practices.

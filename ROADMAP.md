@@ -8,12 +8,12 @@ synchronized with GitHub issues, planning notes, pull requests, and
 
 | Phase | Parent issue | Branch | Status |
 |-------|-------------|--------|--------|
-| P0 Bootstrap scaffold | TBD | `main` | Complete |
-| P1 Core image processing | TBD | `main` | Complete |
-| P2 U-Net model and training | TBD | `main` | Complete (module stubs) |
-| P3 CLI and evaluation | TBD | `main` | Complete (CLI scaffold) |
-| P4 Docs, examples, alpha hardening | #2 | `main` | Active |
-| P5 Data management and DataLad | #1 | `main` | Active |
+| P0 Bootstrap scaffold | — | `main` | Complete (pre-workflow) |
+| P1 Core image processing | — | `main` | Complete (pre-workflow) |
+| P2 U-Net model and training | — | `main` | Complete (pre-workflow) |
+| P3 CLI and evaluation | — | `main` | Complete (pre-workflow) |
+| P4 v0.1.0a1 alpha release | #3 | `feature/p4-v0.1.0a1-release` | Active |
+| P5 Populate DataLad data repo | #4 | `feature/p5-populate-data-repo` | Planned (blocked by #3) |
 
 ## Phase 0: Bootstrap Scaffold
 
