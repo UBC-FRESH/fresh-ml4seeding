@@ -27,6 +27,17 @@ issues + PR to `main`.
   with GPS DMS coordinates, pose extraction (yaw/pitch/roll), coordinate
   conversion, and spacing estimation all working correctly.
 - Closed parent issue #4.
+- Completed Phase 6: cross-site validation on A58 and G15, retraining without
+  aggressive filtering/oversampling, evaluation of focal loss and larger
+  architectures (up to 138M parameters on RTX PRO 6000 Blackwell 98 GB GPU).
+- Key finding: class imbalance is the fundamental bottleneck — "good" and
+  "fair" classes remain unlearnable (IoU < 0.03) regardless of model size or
+  loss function. Best model: focal loss, n_filters=128, test accuracy=0.932,
+  FG mean IoU=0.319.
+- Saved retrained model to data repo (`best_unet_focal_n128.pt`, 528 MB).
+- Updated technical report with cross-site validation and retraining results
+  (new Section 5.11, updated Sections 6.5 and 7).
+- Closed parent issue #6.
 
 - Created the fresh-ml4seeding repository as a re-implementation of the
   prototype ML4seeding pipeline with proper UBC-FRESH software engineering

@@ -14,6 +14,7 @@ synchronized with GitHub issues, planning notes, pull requests, and
 | P3 CLI and evaluation | — | `main` | Complete (pre-workflow) |
 | P4 v0.1.0a1 alpha release | #3 | `main` | Complete |
 | P5 Populate DataLad data repo | #4 | `main` | Complete |
+| P6 Cross-site validation and retraining | #6 | `main` | Complete |
 
 ## Phase 0: Bootstrap Scaffold
 
