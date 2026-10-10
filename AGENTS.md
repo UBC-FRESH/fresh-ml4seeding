@@ -43,6 +43,10 @@ Rules:
 - Record provenance for every external dataset, model checkpoint, and
   evaluation result.
 - See `planning/data-management.md` for the full DataLad setup guide.
+- Arbutus S3 credentials for annex payload pushes are on this machine at
+  `/home/gep/projects/ignitebc-flashforest/tmp/aws-credentials.txt`
+  (`source` it before `git annex copy --to arbutus-s3`). Untracked by
+  design; do not ask the user for credentials and never commit them.
 
 ## Working Principles
 

@@ -67,9 +67,14 @@ datalad save -m "Add project data"
 
 ### Initialize S3 special remote
 
+**Credentials (do not ask the user for these):** the AWS keys for
+`arbutus-s3` live on this machine at
+`/home/gep/projects/ignitebc-flashforest/tmp/aws-credentials.txt`
+(shell format — `source` it before any `git annex copy --to arbutus-s3`).
+This file is intentionally untracked; never copy it into a repo.
+
 ```bash
-export AWS_ACCESS_KEY_ID=<key-id>
-export AWS_SECRET_ACCESS_KEY=<secret-key>
+source /home/gep/projects/ignitebc-flashforest/tmp/aws-credentials.txt
 export AWS_DEFAULT_REGION=ca-west-1
 
 git annex initremote arbutus-s3 \
