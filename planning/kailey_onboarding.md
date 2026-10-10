@@ -75,15 +75,15 @@ Here's the honest state of play, framed as the questions we can now attack:
 
 ## 6. Concepts you'll meet (mini-glossary, no math)
 
-- **Annotation** – a human marking the correct answer on an image (paint or polygons). The model learns by imitation; garbage in, garbage out.
-- **Training / weights / checkpoint** – the learning process, and the saved result (a `.pt` file). "Our current model" = one specific checkpoint.
-- **Split (train/valid/test)** – we hide some images from training so we can measure honesty: the model is scored only on images it never studied.
-- **IoU** – overlap between model output and human answer; our headline number (currently ≈ 0.65 on A58).
-- **TTA (test-time augmentation)** – at prediction time, run the image through rotated/flipped and average; small free accuracy boost.
-- **TTA disagreement** – how much the model changes its mind under those flips; high disagreement = the model is guessing. We use it to pick which images are most worth annotating ("active learning").
-- **Pre-labels** – model-generated annotations uploaded for a human to *fix*, which is much faster than painting from scratch. (None in your sandbox—clean slate on purpose.)
-- **Domain shift / transfer gap** – how much a model trained on one site/time degrades on another. Your experiment #2 above.
-- **Semantic vs instance segmentation** – "which pixels are microsite" (semantic, what we do) vs "outline each individual object" (instance, what the feature project does).
+- **Annotation**: a human marking the correct answer on an image (paint or polygons). The model learns by imitation; garbage in, garbage out.
+- **Training / weights / checkpoint**: the learning process, and the saved result (a `.pt` file). "Our current model" = one specific checkpoint.
+- **Split (train/valid/test)**: we hide some images from training so we can measure honesty: the model is scored only on images it never studied.
+- **IoU**: overlap between model output and human answer; our headline number (currently ≈ 0.65 on A58).
+- **TTA (test-time augmentation)**: at prediction time, run the image through rotated/flipped and average; small free accuracy boost.
+- **TTA disagreement**: how much the model changes its mind under those flips; high disagreement = the model is guessing. We use it to pick which images are most worth annotating ("active learning").
+- **Pre-labels**: model-generated annotations uploaded for a human to *fix*, which is much faster than painting from scratch. (None in your sandbox—clean slate on purpose.)
+- **Domain shift / transfer gap**: how much a model trained on one site/time degrades on another. Your experiment #2 above.
+- **Semantic vs instance segmentation**: "which pixels are microsite" (semantic, what we do) vs "outline each individual object" (instance, what the feature project does).
 
 ## 7. First two weeks: a concrete checklist
 
@@ -95,7 +95,7 @@ Here's the honest state of play, framed as the questions we can now attack:
 
 ## 8. Where things live / who to ask
 
-- Everything is on GitHub under **UBC-FRESH**. Clone your own working copies wherever you prefer to work (on the shared compute server, that's your own home directory—same machine as the JupyterHub terminal, your own space).
+- Everything is on GitHub under **UBC-FRESH**. Clone your own working copies wherever you prefer to work—on the shared compute server (the JupyterHub machine), that simply means your own home directory there.
 - Documentation (decisions, results, negative results—all written up): `planning/` in the main repo—especially `model_alternatives.md` (model comparison), `nope_map.md` (the obstacle-map work, incl. the veto failure), and `stereo_depth_assessment.md` (the terrain story).
 - Data (datasets, model weights, derived maps, evaluation records): the DataLad repo `github.com/UBC-FRESH/fresh-ml4seeding-data`—clone it and `datalad get` what you need (e.g., `datalad get data/models data/datasets`).
 - Roboflow: FRESH Workspace—`a58-sandbox` (yours), `a58-microsites` + `a58-features` (look-only).
