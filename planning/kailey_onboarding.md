@@ -95,10 +95,11 @@ Here's the honest state of play, framed as the questions we can now attack:
 
 ## 8. Where things live / who to ask
 
-- Compute server project root: `/home/gep/projects/ignitebc-flashforest/`
-- Documentation (decisions, results, negative results — all written up): `notes/` — especially `model_alternatives.md` (model comparison), `nope_map.md` (the obstacle-map work, incl. the veto failure), and `stereo_depth_assessment.md` (the terrain story).
+- Everything is on GitHub under **UBC-FRESH**, also checked out on the compute server at `/home/gep/projects/ignitebc-flashforest/fresh-ml4seeding/`.
+- Documentation (decisions, results, negative results — all written up): `planning/` in the main repo — especially `model_alternatives.md` (model comparison), `nope_map.md` (the obstacle-map work, incl. the veto failure), and `stereo_depth_assessment.md` (the terrain story).
+- Data (datasets, model weights, derived maps, evaluation records): the DataLad repo `github.com/UBC-FRESH/fresh-ml4seeding-data` — clone it and `datalad get` what you need (e.g., `datalad get data/models data/datasets`).
 - Roboflow: FRESH Workspace — `a58-sandbox` (yours), `a58-microsites` + `a58-features` (look-only).
-- Repo: `github.com/UBC-FRESH/a58-microsite-sandbox`
+- Code sandbox repo: `github.com/UBC-FRESH/a58-microsite-sandbox`
 - Anything confusing, broken, or surprising: tell Gregory. There is no such thing as a stupid question in this project — and "surprising" results are often the publishable ones, so write them down when you hit them.
 
 Welcome to the program. The ML is the plumbing; the interesting science is yours.
