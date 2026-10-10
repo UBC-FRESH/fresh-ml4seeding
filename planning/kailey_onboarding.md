@@ -19,7 +19,7 @@ You know all three blocks in MKRF on the ground. Here's what we have from the ai
 - **G15**: imagery exists, essentially unannotated.
 - There are also photogrammetric products for A58: a 3D point cloud (715,000 points), a height map ("height above ground" for every 18 cm cell of the block), and a georeferenced obstacle map ("nope map") that flags bumps/stumps/logs/berms. More on these below—they turned out to matter for your ecology questions in an unexpected way.
 
-Everything ML lives in two git repos on the compute server (and GitHub): the **code repo** `/home/gep/projects/ignitebc-flashforest/fresh-ml4seeding/` (package code in `src/`, experiment scripts in `scripts/`, write-ups in `planning/`, roadmap in `ROADMAP.md`) and its **data submodule** `fresh-ml4seeding/external/fresh-ml4seeding-data/` (datasets in `data/datasets/`, model weights in `data/models/`, derived products in `data/derived/`, evaluation records in `data/results/`). Both are mirrored on GitHub under UBC-FRESH, so you can browse everything there too. You never have to guess where something is—ask and I'll point you.
+Everything ML lives in two GitHub repos under the **UBC-FRESH** org: the **code repo** `github.com/UBC-FRESH/fresh-ml4seeding` (package code in `src/`, experiment scripts in `scripts/`, write-ups in `planning/`, roadmap in `ROADMAP.md`) and its **data repo** `github.com/UBC-FRESH/fresh-ml4seeding-data` (datasets in `data/datasets/`, model weights in `data/models/`, derived products in `data/derived/`, evaluation records in `data/results/`). To work locally, clone them anywhere you like—`git clone --recurse-submodules https://github.com/UBC-FRESH/fresh-ml4seeding`—then fetch data payloads from inside the data submodule with `datalad get <path>` (downloads are public, no credentials needed). You never have to guess where something is—ask and I'll point you.
 
 ## 3. The current model, in plain terms
 
@@ -95,7 +95,7 @@ Here's the honest state of play, framed as the questions we can now attack:
 
 ## 8. Where things live / who to ask
 
-- Everything is on GitHub under **UBC-FRESH**, also checked out on the compute server at `/home/gep/projects/ignitebc-flashforest/fresh-ml4seeding/`.
+- Everything is on GitHub under **UBC-FRESH**. Clone your own working copies wherever you prefer to work (on the shared compute server, that's your own home directory—same machine as the JupyterHub terminal, your own space).
 - Documentation (decisions, results, negative results—all written up): `planning/` in the main repo—especially `model_alternatives.md` (model comparison), `nope_map.md` (the obstacle-map work, incl. the veto failure), and `stereo_depth_assessment.md` (the terrain story).
 - Data (datasets, model weights, derived maps, evaluation records): the DataLad repo `github.com/UBC-FRESH/fresh-ml4seeding-data`—clone it and `datalad get` what you need (e.g., `datalad get data/models data/datasets`).
 - Roboflow: FRESH Workspace—`a58-sandbox` (yours), `a58-microsites` + `a58-features` (look-only).
