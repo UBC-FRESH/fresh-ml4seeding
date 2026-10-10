@@ -81,3 +81,39 @@ issues + PR to `main`.
   synthetic data demos for all package modules.
 - Expanded tiling and grid test coverage with GeoTIFF fixtures and edge cases.
 
+
+## 2026-10-10 — A58 photogrammetry round + artifact migration (P7)
+
+**Experiments (documented in `planning/`):**
+- Full-flight COLMAP reconstruction of A58 segment 2 (750/750 frames,
+  715,225 points, 0.22 px BA cost) — supersedes the 50-frame partial model.
+- Terrain fusion A/B on identical subsets: RGB+DEM (8ch) vs RGB-only —
+  negative (ΔIoU +0.005); alignment confound of the 2026-10-04 result
+  removed via per-image pose-projected DEM rendering.
+- Geometric "nope map" (HAG bump/pit masks) validated vs 353 hand-annotated
+  features (slash 87 %, log 90 %, rock 60 % object recall); georeferenced to
+  UTM 10N via EXIF-GPS similarity (horiz RMS 0.29 m; RTK confirmed OFF from
+  XMP RtkFlag=16, single-point ~1 m absolute).
+- Orthomosaic co-registration NOT applied: tie-point analysis shows the ODM
+  ortho is internally distorted ±4–6 m while the SfM map is rigid at 0.3 m.
+- Microsite-veto experiment: negative (benefit/cost 0.19 — vetoes mostly
+  true microsites; GT microsites live inside the slash matrix).
+- Model shoot-out with TTA + ensembles: new best is
+  unet_resnet34_focal+TTA (IoU 0.652 full / 0.725 clean); SegFormer-B3
+  trained and rejected; capacity not the bottleneck at 384 train images.
+- Active-learning shortlist (50/204 unannotated frames) generated with
+  TTA-disagreement scoring.
+
+**Migration:** all non-temp artifacts moved into the repos.
+- Data repo: 13 checkpoints (`data/models/`), v4 microsite dataset +
+  6-image feature set (`data/datasets/`), nope map + galleries
+  (`data/derived/`), COLMAP model + database (`data/photogrammetry/`),
+  evaluation JSONs (`data/results/`). Metadata pushed to GitHub; annex
+  payload push to arbutus-s3 pending AWS credentials.
+- This repo: research notes under `planning/` (nope_map,
+  stereo_depth_assessment, model_alternatives, feature_detection_plan,
+  kailey_onboarding), analysis scripts under `scripts/photogrammetry/` and
+  `scripts/experiments/`.
+- New public sandbox repo `UBC-FRESH/a58-microsite-sandbox` (train/eval/
+  infer quickstart) for student onboarding; Roboflow project
+  `gregory-paradis-ubc-ca/a58-sandbox` (750 unannotated frames, BY-NC-SA).
