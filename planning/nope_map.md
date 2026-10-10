@@ -7,7 +7,7 @@
 Site-level "not microsite" obstacle layer generated **without any annotation**,
 from the COLMAP full-flight reconstruction. Intended use: veto/mask layer on top
 of the RGB microsite segmentation (SegFormer-B2), NOT as a fused input channel
-(fusion was tested and does not help — see `stereo_depth_assessment.md` §4).
+(fusion was tested and does not help—see `stereo_depth_assessment.md` §4).
 
 Catches: stumps, logs, boulders, slash piles, berms (bumps). Does NOT catch:
 thin flat-lying slash (<~15 cm tall), flush rocks, smooth compacted road
@@ -52,11 +52,11 @@ that were off by 8.79× (local units presented as meters).
 | 0.25 / 0.10 (conservative) | 0.48 | 0.60 | 0.20 | 0/1 |
 | 0.35 / 0.10 | 0.31 | 0.30 | 0.00 | 0/1 |
 
-- Precision NOT measurable (annotations deliberately incomplete — features fill
+- Precision NOT measurable (annotations deliberately incomplete—features fill
   ~93% of each image; only a subset was clicked).
 - QC observations: pickup truck flagged; big log flagged full-length; dense
   slash fields flagged; gravel road surface mostly clean but shows speckle
-  (SfM noise floor at this sensitivity — consider min-blob-size filtering if
+  (SfM noise floor at this sensitivity—consider min-blob-size filtering if
   a cleaner mask is needed).
 
 ## Operating points (site stats)
@@ -73,24 +73,24 @@ that were off by 8.79× (local units presented as meters).
 depression −0.70 m (single small blob). What looked like ditches in early
 renders were survey-boundary interpolation artifacts (removed by erosion).
 The site is flat on the negative side. If a ditch/hole exists at A58, it is
-outside this ~112×97 m footprint — the georeferenced GeoTIFF can be checked
+outside this ~112×97 m footprint—the georeferenced GeoTIFF can be checked
 against a map to confirm what the flight covered.
 
 ## Products (`external/fresh-ml4seeding-data/data/derived/nope_map/`)
 
-- `site_nope_utm10.tif` — **georeferenced** GeoTIFF (EPSG:32610): bands
+- `site_nope_utm10.tif`—**georeferenced** GeoTIFF (EPSG:32610): bands
   [nope, valid, HAG-meters]
-- `nope_on_orthomosaic_qc.png` — overlay on existing A58Segment2 ortho
-- `site_nope.npz` — local-frame grids (incl. `hag_meters`, `rough_meters`,
+- `nope_on_orthomosaic_qc.png`—overlay on existing A58Segment2 ortho
+- `site_nope.npz`—local-frame grids (incl. `hag_meters`, `rough_meters`,
   `scale_m_per_unit`) + alignment transforms
-- `per_image/<frame>.png` — 750 masks (0=ok, 1=bump, 2=pit, 255=no-data)
-- `per_image_v4/<v4stem>.png` — 548 masks in v4 training geometry
-- `site_nope_map.png`, `nope_qc_montage.png` — visualizations
+- `per_image/<frame>.png`—750 masks (0=ok, 1=bump, 2=pit, 255=no-data)
+- `per_image_v4/<v4stem>.png`—548 masks in v4 training geometry
+- `site_nope_map.png`, `nope_qc_montage.png`—visualizations
 - `metadata.json`, `georeferencing.json`
 - Scripts: `scripts/photogrammetry/build_nope_map.py`, `scripts/photogrammetry/georeference_nope_map.py`,
   `scripts/photogrammetry/dem_obstacle_test.py`
 
-## Veto experiment: NEGATIVE (2026-10-08) — do not use as a microsite veto
+## Veto experiment: NEGATIVE (2026-10-08)—do not use as a microsite veto
 
 Tested `microsite_pred × NOT(nope)` on the v4 test set (53 images,
 SegFormer-B2, IoU 0.572 baseline):
@@ -107,11 +107,11 @@ positives (benefit/cost 0.19×)**. Min-blob sweep (0→8000 px ≈ 1.8 m²)
 does not fix it (B/C stays ~0.19): the large flagged regions (slash fields)
 *contain* most annotated microsites. GT "microsite" = plantable pocket
 INSIDE the slash matrix (soil contact/shelter/moisture), not "area free of
-debris" — 15–25 cm geometry cannot separate the two. The user's concern
+debris"—15–25 cm geometry cannot separate the two. The user's concern
 about filtering out good microsites was quantitatively validated.
 
 **What the nope map IS good for:** macro-feature mapping (road, landing,
-truck, large logs, slash piles — 87–90% recall at 15 cm thresholds) for
+truck, large logs, slash piles—87–90% recall at 15 cm thresholds) for
 site description/logistics, NOT as a planting filter. Microsite filtering
 stays with the RGB model + more training data.
 
@@ -135,7 +135,7 @@ stays with the RGB model + more training data.
 - Consequence: treat the nope map GeoTIFF as the geometric reference; the
   orthomosaic is a visual backdrop good to ±4–6 m locally.
 - Scripts: `scripts/photogrammetry/georeference_nope_map.py` (GPS alignment + GeoTIFF),
-  `scripts/photogrammetry/coregister_tiepoints.py` (tie-point analysis, guarded — aborts
+  `scripts/photogrammetry/coregister_tiepoints.py` (tie-point analysis, guarded—aborts
   without writing if the fit is weak).
 
 ## Limitations / TODO
@@ -143,7 +143,7 @@ stays with the RGB model + more training data.
 - GPS accuracy ~1 m horizontal / ~2.5 m vertical. Confirmed from image XMP
   metadata (`drone-dji:RtkFlag=16` on all sampled frames = single-point;
   `RtkStdLon/Lat ≈ 0.8–1.1 m`, `RtkStdHgt ≈ 2–2.7 m`, `RtkDiffAge=0`).
-  **RTK was never engaged during this flight** (the M300+P1 supports it — a
+  **RTK was never engaged during this flight** (the M300+P1 supports it—a
   D-RTK2 base or NTRIP network corrections would give RtkFlag=50, ~1–3 cm).
   Fine for a veto layer; enable RTK on future flights for survey-grade
   georeferencing.
@@ -152,4 +152,4 @@ stays with the RGB model + more training data.
 - Effective spatial resolution ~18–26 cm: sub-20 cm features invisible.
 - Roads detected only via ruts/berms; geofence roads separately if needed.
 - Other sites: A10 (338 frames) and G15 imagery + orthomosaics exist in the
-  same eghase02 input dir — same pipeline applies.
+  same eghase02 input dir—same pipeline applies.

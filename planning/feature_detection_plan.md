@@ -88,16 +88,16 @@ Detecting large terrain features that are NOT microsites will improve the micros
 1. Open the annotation URL above
 2. Use the **SAM3 smart polygon tool** (magic wand icon)
 3. Click on each feature type:
-   - **Stump** — tree stumps (elevated, woody)
-   - **Log** — fallen logs (elongated, woody)
-   - **Boulder** — large rocks (rounded, hard edges)
-   - **Water** — pooling water (reflective, flat)
-   - **Road** — gravel road (linear, light-colored)
-   - **Slash** — slash piles / woody debris (irregular, brown)
+   - **Stump**—tree stumps (elevated, woody)
+   - **Log**—fallen logs (elongated, woody)
+   - **Boulder**—large rocks (rounded, hard edges)
+   - **Water**—pooling water (reflective, flat)
+   - **Road**—gravel road (linear, light-colored)
+   - **Slash**—slash piles / woody debris (irregular, brown)
 4. Label each annotation with the correct class name
 5. Save and move to the next image
 
-The SAM3 tool will generate precise masks from your clicks — much faster than freehand drawing.
+The SAM3 tool will generate precise masks from your clicks—much faster than freehand drawing.
 
 ---
 

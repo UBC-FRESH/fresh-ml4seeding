@@ -70,7 +70,7 @@ datalad save -m "Add project data"
 **Credentials (do not ask the user for these):** the AWS keys for
 `arbutus-s3` live on this machine at
 `/home/gep/projects/ignitebc-flashforest/tmp/aws-credentials.txt`
-(shell format — `source` it before any `git annex copy --to arbutus-s3`).
+(shell format—`source` it before any `git annex copy --to arbutus-s3`).
 This file is intentionally untracked; never copy it into a repo.
 
 ```bash

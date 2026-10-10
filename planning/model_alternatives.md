@@ -47,11 +47,11 @@ Report positive-class IoU and Dice, but add:
 - **Spatial usability:** number/area of deployable patches after minimum-area rules
 - **Uncertainty:** per-site or per-flight metrics with confidence intervals from bootstrapping independent spatial units
 
-### Critical Question — ANSWERED
+### Critical Question—ANSWERED
 
 **Were the test tiles held out by flight/orthomosaic or spatial block, or randomly split from the same imagery as training?**
 
-**Answer: Randomly split from the same imagery.** The Roboflow version randomly split the 418 annotated images into 414 train / 2 valid / 2 test. The test images are from the same areas as the training images — the 0.665 IoU is likely inflated by spatial autocorrelation.
+**Answer: Randomly split from the same imagery.** The Roboflow version randomly split the 418 annotated images into 414 train / 2 valid / 2 test. The test images are from the same areas as the training images—the 0.665 IoU is likely inflated by spatial autocorrelation.
 
 **Implication:** The reported performance is an overestimate of deployment performance. A proper spatial split (by flight area, orthomosaic section, or spatial block) would give a more realistic estimate.
 
@@ -231,19 +231,19 @@ Report positive-class IoU and Dice, but add:
 
 Given the extreme class imbalance (7.7% microsite) and small dataset (414 images), the most promising approaches are:
 
-1. **SegFormer-B2 or B3** — transformer-based, handles imbalance better than CNNs, good for remote sensing
-2. **Focal Loss** — specifically designed for extreme imbalance
-3. **Copy-Paste Augmentation** — artificially increases the rare class frequency
-4. **Mask2Former** — current state-of-the-art, if we want to try the best available
+1. **SegFormer-B2 or B3**—transformer-based, handles imbalance better than CNNs, good for remote sensing
+2. **Focal Loss**—specifically designed for extreme imbalance
+3. **Copy-Paste Augmentation**—artificially increases the rare class frequency
+4. **Mask2Former**—current state-of-the-art, if we want to try the best available
 
 ---
 
 ## Related Work: SegUNet (Farhadpour et al., 2026)
 
-A recent preprint ([Farhadpour et al., 2026](https://eartharxiv.org/repository/view/13709/)) compares U-Net, SegFormer, and a hybrid **SegUNet** for semantic segmentation of anthropogenic geomorphic features from lidar data — a task very similar to ours (terrain feature extraction with class imbalance).
+A recent preprint ([Farhadpour et al., 2026](https://eartharxiv.org/repository/view/13709/)) compares U-Net, SegFormer, and a hybrid **SegUNet** for semantic segmentation of anthropogenic geomorphic features from lidar data—a task very similar to ours (terrain feature extraction with class imbalance).
 
 **Key findings relevant to our work:**
-- **SegUNet (hybrid SegFormer-UNet) outperforms both pure approaches** — combines CNN texture sensitivity with transformer long-range context
+- **SegUNet (hybrid SegFormer-UNet) outperforms both pure approaches**—combines CNN texture sensitivity with transformer long-range context
 - **Random initialization often matches or exceeds ImageNet pretraining** for terrain data (domain gap between natural images and terrain)
 - **Focal Tversky loss** is used for class imbalance (similar to our focal loss approach)
 - **End-to-end training** is the most consistent driver of gains
@@ -267,11 +267,11 @@ Trained four models on the v3 dataset (414 images) with identical splits and eva
 
 **Key findings:**
 - **Focal Loss U-Net is the best**: Test IoU 0.698 (+5% over baseline), Test Dice 0.821 (+3%), converges 2.3x faster (38 vs 88 epochs)
-- **SegFormer-B0 is competitive**: Test IoU 0.674 with only 3.7M parameters (6.6x smaller than U-Net) — great for deployment
-- **DeepLabV3+ underperforms**: Test IoU 0.639, worse than baseline U-Net — atrous convolutions don't help for this spectral task
+- **SegFormer-B0 is competitive**: Test IoU 0.674 with only 3.7M parameters (6.6x smaller than U-Net)—great for deployment
+- **DeepLabV3+ underperforms**: Test IoU 0.639, worse than baseline U-Net—atrous convolutions don't help for this spectral task
 - **Class imbalance was the bottleneck**, not the architecture. Focal Loss addresses it directly.
 
-**Recommendation:** Use **SegFormer-B2** for the next training round (v5) — it achieved the best Test IoU (0.622) on our data. Consider a SegUNet hybrid (SegFormer encoder + U-Net decoder) as a follow-up experiment based on the Farhadpour et al. (2026) findings.
+**Recommendation:** Use **SegFormer-B2** for the next training round (v5)—it achieved the best Test IoU (0.622) on our data. Consider a SegUNet hybrid (SegFormer encoder + U-Net decoder) as a follow-up experiment based on the Farhadpour et al. (2026) findings.
 
 ---
 
@@ -279,7 +279,7 @@ Trained four models on the v3 dataset (414 images) with identical splits and eva
 
 All candidates re-evaluated in one harness on the v4 test set (54 images;
 "clean" subset n=48 excludes 6 images whose rf-hash appears in v1–v3 train
-splits — possible leakage for older checkpoints). TTA = 8 dihedral views
+splits—possible leakage for older checkpoints). TTA = 8 dihedral views
 averaged. Full data: `external/fresh-ml4seeding-data/data/results/tta_ensemble_eval.json`.
 
 | Rank | Model | IoU full | IoU clean |
@@ -298,7 +298,7 @@ Conclusions:
   evaluation on v4).
 - TTA: +0.014 (U-Net), +0.015 (B0), ~0 (B2).
 - SegFormer-B3 (45M params, `segformer_b3_best.pt` / `segformer_b3_result.json`):
-  no gain over B2 — capacity is not the bottleneck at 384 training images.
+  no gain over B2—capacity is not the bottleneck at 384 training images.
 - Top-3 within noise (per-image σ ≈ 0.25). Simplest production choice:
   unet_focal + TTA.
 - **Architecture is exhausted at this data size; further gains need more
@@ -308,11 +308,11 @@ Conclusions:
 
 ## References
 
-- Chen et al. (2018) — DeepLabV3+
-- Xie et al. (2021) — SegFormer
-- Cheng et al. (2022) — Mask2Former
-- Wang et al. (2020) — HRNet
-- Zhao et al. (2017) — PSPNet
-- Lin et al. (2017) — Focal Loss
-- Berman et al. (2018) — Lovász Loss
-- Ghiasi et al. (2021) — Copy-Paste Augmentation
+- Chen et al. (2018)—DeepLabV3+
+- Xie et al. (2021)—SegFormer
+- Cheng et al. (2022)—Mask2Former
+- Wang et al. (2020)—HRNet
+- Zhao et al. (2017)—PSPNet
+- Lin et al. (2017)—Focal Loss
+- Berman et al. (2018)—Lovász Loss
+- Ghiasi et al. (2021)—Copy-Paste Augmentation

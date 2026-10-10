@@ -12,7 +12,7 @@
 
 - **Imagery:** Aerial drone imagery (DJI ZenmuseP1, 8192×5460, 35mm lens, F4.0)
 - **Camera metadata:** GPS position, altitude, gimbal pose (yaw/pitch/roll) for each image
-- **Task:** Semantic segmentation for microsite classification (good/fair/poor) — binary in practice (microsite vs. background)
+- **Task:** Semantic segmentation for microsite classification (good/fair/poor)—binary in practice (microsite vs. background)
 - **Current model:** SegFormer-B2 achieving Test IoU 0.622 on 414 images
 - **Challenge:** Extreme class imbalance (7.7% microsite), subtle spectral differences
 
@@ -27,8 +27,8 @@
 | Orthomosaics | ✅ Yes | GeoTIFF | A10, A58, G15 |
 | Annotated masks | ✅ Yes | PNG | 414 images (v4) |
 | Stereo pairs | ⚠️ Indirect | Multi-view overlap | Not a stereo rig, but overlapping views |
-| DSM/DTM | ❌ No | — | Could be generated from photogrammetry |
-| Depth maps | ❌ No | — | Could be estimated from stereo pairs |
+| DSM/DTM | ❌ No |—| Could be generated from photogrammetry |
+| Depth maps | ❌ No |—| Could be estimated from stereo pairs |
 
 ### Key Insight
 
@@ -40,31 +40,31 @@ Our drone images are from a **single camera**, not a stereo pair. However, the D
 
 ### TerrainNet (Meng et al., 2023)
 
-**Relevance:** High — off-road terrain perception with RGB + stereo depth.
+**Relevance:** High—off-road terrain perception with RGB + stereo depth.
 
 **Key findings:**
 - Stereo depth provides significant gains: "Models with stereo depths as additional input outperform their RGB-only counterparts by a large margin"
-- For off-road environments, objects can have similar appearances but different sizes — hard to estimate depth from color alone
+- For off-road environments, objects can have similar appearances but different sizes—hard to estimate depth from color alone
 - Uses depth completion to fill in missing stereo depth
 - Multi-view RGB + stereo depth for joint semantic and geometric terrain prediction
 
 **Implication for us:** Stereo depth could help distinguish microsites that look similar in RGB but have different geometric properties (e.g., exposed soil on mounds vs. depressions).
 
-### Valada et al. (2016) — Multispectral Forest Segmentation
+### Valada et al. (2016)—Multispectral Forest Segmentation
 
-**Relevance:** High — forest scene segmentation with RGB + NIR + depth fusion.
+**Relevance:** High—forest scene segmentation with RGB + NIR + depth fusion.
 
 **Key findings:**
 - RGB + NIR + Depth fusion outperforms RGB alone for forest segmentation
 - Depth alone performs poorly, but fused with RGB it helps
-- "Late-fused-convolution" approach works well — fuse features from different modalities at the feature level
+- "Late-fused-convolution" approach works well—fuse features from different modalities at the feature level
 - Their dataset is forest environments (similar to ours)
 
 **Implication for us:** Feature-level fusion of RGB and terrain geometry could improve our microsite classification. The forest environment is similar to our cut blocks.
 
 ### SNE-RoadSeg (Fan et al., 2020)
 
-**Relevance:** Medium — freespace detection with surface normals from depth.
+**Relevance:** Medium—freespace detection with surface normals from depth.
 
 **Key findings:**
 - Surface normals from depth improve segmentation
@@ -76,7 +76,7 @@ Our drone images are from a **single camera**, not a stereo pair. However, the D
 
 ### ORFD / OFF-Net (Min et al., 2022)
 
-**Relevance:** Medium — off-road freespace detection with RGB + LiDAR surface normals.
+**Relevance:** Medium—off-road freespace detection with RGB + LiDAR surface normals.
 
 **Key findings:**
 - Transformer fusion of RGB and surface normals
@@ -94,8 +94,8 @@ Our drone images are from a **single camera**, not a stereo pair. However, the D
 
 **Yes, but not in the traditional sense.** Our drone images are from a single camera, not a stereo pair. However, the DJI ZenmuseP1 captures images with high overlap (80% forward, 70% side) for photogrammetry. This means:
 
-1. **Multi-view stereo is possible** — consecutive images from different positions can be used for depth estimation
-2. **Photogrammetric DSM is the practical approach** — use the existing orthomosaic pipeline to generate a DSM, then extract terrain features
+1. **Multi-view stereo is possible**—consecutive images from different positions can be used for depth estimation
+2. **Photogrammetric DSM is the practical approach**—use the existing orthomosaic pipeline to generate a DSM, then extract terrain features
 
 ### Practical approach: DSM + terrain features
 
@@ -141,7 +141,7 @@ This leverages the photogrammetric data we already have and is much more practic
 
 The 2026-10-04 negative result was potentially invalid: the DSM was built from a
 COLMAP reconstruction of frames 0001–0050 only, while the v4 training images come
-from frames 0203–0750 — **zero overlap**, so terrain and pixels never corresponded.
+from frames 0203–0750—**zero overlap**, so terrain and pixels never corresponded.
 This follow-up eliminated the alignment confound:
 
 - **Reconstruction:** COLMAP on all 750 flight frames (1024×682), sequential
@@ -152,7 +152,7 @@ This follow-up eliminated the alignment confound:
   *(Erratum 2026-10-07: grid/threshold figures quoted here were in COLMAP's
   arbitrary local units; GPS alignment shows 1 unit = 8.79 m, so the grid was
   really ~17.6 cm cells over ~112×97 m, and feature windows were ~9× larger
-  than stated. The A/B conclusion is unaffected — inputs were z-score
+  than stated. The A/B conclusion is unaffected—inputs were z-score
   normalized, and alignment correctness does not depend on scale.)*
 - **Per-image rendering:** ray-cast every pixel against the DEM with 3
   fixed-point parallax-correction iterations, stretched to v4 geometry
@@ -166,7 +166,7 @@ This follow-up eliminated the alignment confound:
 | RGB-only (control) | 0.5837 ± 0.258 | 0.694 | 0.6072 (ep 32) |
 | RGB + terrain | 0.5885 ± 0.249 | 0.703 | 0.6003 (ep 52) |
 
-**Result:** Δ IoU = +0.005 — a wash, well within per-image noise (σ ≈ 0.25).
+**Result:** Δ IoU = +0.005—a wash, well within per-image noise (σ ≈ 0.25).
 The terrain arm trained longer before plateauing but did not generalize better.
 
 **Updated conclusion:** With alignment and resolution confounds removed,
@@ -181,7 +181,7 @@ histories: `external/fresh-ml4seeding-data/data/results/terrain_ab_*.json`.
 
 **BUT** the object-height component of the DSM is useful on its own: see
 `nope_map.md` (2026-10-07) for the geometric "not-microsite" veto layer
-(stumps/logs/slash-piles/pits) built from the same reconstruction — validated
+(stumps/logs/slash-piles/pits) built from the same reconstruction—validated
 against the 6-image feature annotation set, no model training required.
 
 ---
@@ -250,7 +250,7 @@ If the hypothesis is correct, RGB+terrain should outperform RGB-only, particular
 
 ### Resource Requirements
 
-- **Compute:** 1 GPU (RTX PRO 6000, 102GB VRAM) — sufficient for the experiment
+- **Compute:** 1 GPU (RTX PRO 6000, 102GB VRAM)—sufficient for the experiment
 - **DSM generation:** ~1-2 hours for photogrammetry processing
 - **Training:** ~30 minutes for the multi-input model
 - **Total time:** ~3-4 hours for the complete experiment
