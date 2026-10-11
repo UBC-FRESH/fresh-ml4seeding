@@ -22,7 +22,7 @@ The data repo is added as a git submodule at `external/fresh-ml4seeding-data`.
 | Setting | Value |
 |---------|-------|
 | Remote name | `arbutus-s3` |
-| Endpoint | `object-arbutus.cloud.computecanada.ca` |
+| Endpoint | `object-arbutus.alliancecan.ca` |
 | Bucket | `ubc-fresh-ml4seeding-data` |
 | Region | `ca-west-1` |
 | Protocol | `https` |
@@ -82,8 +82,8 @@ git annex initremote arbutus-s3 \
   encryption=none \
   bucket=ubc-fresh-ml4seeding-data \
   public=yes \
-  publicurl=https://object-arbutus.cloud.computecanada.ca/ubc-fresh-ml4seeding-data \
-  host=object-arbutus.cloud.computecanada.ca \
+  publicurl=https://object-arbutus.alliancecan.ca/a0d141b801c74d0a819c09b4bde9c3fb:ubc-fresh-ml4seeding-data \
+  host=object-arbutus.alliancecan.ca \
   protocol=https \
   port=80 \
   requeststyle=path \
