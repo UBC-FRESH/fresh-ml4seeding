@@ -6,6 +6,7 @@ You are setting up the infrastructure for a human-in-the-loop annotation+trainin
 
 - Project: ML microsite classification from drone imagery for precision aerial reforestation (IgniteBC × Flash Forest, UBC FRESH).
 - GitHub org **UBC-FRESH** hosts everything: `fresh-ml4seeding` (code repo; `planning/` has all research notes), `fresh-ml4seeding-data` (DataLad data repo; large payloads served from a public S3 annex), `a58-microsite-sandbox` (minimal train/eval/infer quickstart).
+- **Workflow (mandatory)**: `github.com/UBC-FRESH/ubc-fresh-dev-workflow` is the lab's required seed and operating pattern for agent-assisted projects—ROADMAP.md with phases/tasks mirrored in GitHub issues, AGENTS.md operating contract, CHANGE_LOG.md narrative, notes/ decisions, docs/, CI validator, and `scripts/new_project.py` to scaffold new repos. Read its `AGENTS.md` and the session protocol (`docs/agents/session-protocol.rst`) before doing anything else, and follow them for the entire engagement.
 - Read these first, they contain hard-won lessons you must not relearn the hard way: `planning/model_alternatives.md` (which model won and the exact training recipe), `planning/nope_map.md` (pre-labelling/upload pitfalls and the veto experiment), `AGENTS.md` and `planning/data-management.md` (git/DataLad/S3 rules).
 - Current best model: U-Net ResNet34 + focal loss + TTA (test IoU ≈ 0.65 on the A58 v4 dataset). Checkpoint: `data/models/unet_resnet34_focal_best.pt` in the data repo. Training recipe: `scripts/experiments/train_terrain_ab.py` (RGB arm) or `code/train_unet_focal.py` in the sandbox repo.
 - Roboflow workspace: **FRESH Workspace** (`gregory-paradis-ubc-ca`). Existing projects: `a58-microsites` (548 annotated), `a58-features`, `a58-sandbox` (750 raw frames, unannotated, Kailey's playground).
@@ -18,6 +19,13 @@ Build a small, robust, scriptable **annotation flywheel** that Kailey can operat
 2. **Train**: train or fine-tune a fast pre-labeller model on the downloaded labels (default: the U-Net ResNet34 + focal recipe from the notes; optionally warm-start from the existing checkpoint).
 3. **Prelabel**: run inference over the project's **unannotated** images and upload predictions back to Roboflow **as editable pre-labels**—then Kailey corrects them in the UI (much faster than painting from scratch).
 4. **Loop bookkeeping**: track rounds (which images were human-verified in which round, which checkpoint pre-labelled which images, metrics per round) so the loop can run repeatedly and, later, be re-run wholesale for different "microsite" definitions or new model types (e.g., species-wise goodness scoring).
+
+## Workflow adoption (required)
+
+- Create the new tooling repo **from the dev-workflow seed** (`scripts/new_project.py` from `UBC-FRESH/ubc-fresh-dev-workflow`), not from scratch. Ask the user for the repo name; public unless told otherwise.
+- Work the pattern the seed encodes: a `ROADMAP.md` with phases/tasks for this flywheel build (e.g., P0 scaffold, P1 sync, P2 train, P3 prelabel+upload, P4 loop bookkeeping + convergence, P5 runbook + acceptance test), each phase a GitHub parent issue, each task a child issue, work on feature branches, merge by PR, and keep `CHANGE_LOG.md` current as you go.
+- Keep the seed's `AGENTS.md`, CI validator, and docs skeleton working; the flywheel code lives under the package layout the seed provides (thin CLIs over importable functions, with tests—Kailey runs the CLIs, not the internals).
+- Data artifacts still go to the existing `fresh-ml4seeding-data` DataLad repo (not into the new repo), following the data-management rules below.
 
 ## Hard rules (learned the expensive way—violating these breaks trust and data)
 
@@ -38,7 +46,7 @@ Check and report before building: GPU presence (`nvidia-smi`; fall back to CPU-s
 2. `RUNBOOK.md` for Kailey: what each command does, what to do in Roboflow between commands, how to tell when a round is done.
 3. `loop_state.json`: per-round record (images labelled, checkpoint path, metrics, upload counts, timestamps).
 4. A convergence signal: after each `sync`, compute how much the human edited the pre-labels (e.g., fraction of objects added/deleted/edited, or pixel-level change rate) and print a trend table so the user can decide when to stop. Propose the metric, let the user confirm it.
-5. Everything committed to a NEW repo in UBC-FRESH (ask the user for the repo name; public unless told otherwise), with data artifacts going to `fresh-ml4seeding-data` via DataLad.
+5. Everything committed to the NEW dev-workflow-seeded repo in UBC-FRESH (see Workflow adoption; ask the user for the repo name), with data artifacts going to `fresh-ml4seeding-data` via DataLad.
 
 ## Acceptance test
 
@@ -46,8 +54,8 @@ Run one full dry loop on a small scale and show the user evidence: sync a handfu
 
 ## First questions to ask the user (ask these before writing code)
 
-1. Which Roboflow project is the working target for round 1 (existing one, or create a new one—if new, what name/type/license)?
-2. Where do the Roboflow API key and (if needed) AWS/S3 credentials live on this container?
-3. Repo name for the new tooling repo in UBC-FRESH?
+1. Repo name for the new tooling repo in UBC-FRESH (to be created from the dev-workflow seed)?
+2. Which Roboflow project is the working target for round 1 (existing one, or create a new one—if new, what name/type/license)?
+3. Where do the Roboflow API key and (if needed) AWS/S3 credentials live on this container?
 4. Warm-start from `unet_resnet34_focal_best.pt` or train from scratch?
 5. What convergence metric/threshold do you want to use to stop the loop?
